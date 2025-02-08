@@ -1,0 +1,5 @@
+﻿@TodoApi_HostAddress = https://localhost:7295
+@id=4
+DELETE {{TodoApi_HostAddress}}/todoitems/{{id}}
+
+###

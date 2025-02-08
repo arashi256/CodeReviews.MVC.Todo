@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>To-Do App</title>
+    <link rel="stylesheet" href="css/site.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+</head>
+<body style="color: var(--bs-black);background: var(--bs-secondary);">
+    <div class="container" style="padding: 40px;margin: 1px auto;">
+        <section class="py-4 py-xl-5">
+            <div class="container">
+                <div class="text-white bg-dark border rounded border-0 p-4 p-md-5" style="border-radius: 6px;border-top-left-radius: 6px;border: 15px solid var(--bs-black);--bs-body-bg: var(--bs-gray-500);">
+                    <h2 class="fw-bold text-white mb-3">ToDo List App</h2>
+                    <p><br/></p>
+                    <p class="mb-2" style="font-size: 15px;font-weight: bold;">Add New List Item</p>
+                    <div class="my-3" style="width: 100%;padding: 4px;">
+                        <form action="javascript:void(0);" method="POST" onsubmit="addItem()" style="margin: 3px;padding: 5px;">
+                            <p>
+                                <label class="form-label">New Item Name:</label>
+                                <input class="form-control" id="add-name" type="text">
+                            </p>
+                            <button type="submit" class="btn btn-primary btn-lg me-2" style="margin: 2px; font-size: 14px; font-weight: bold;">Add</button>
+                            <button type="reset" class="btn btn-light btn-lg" style="margin: 5px; font-size: 14px; font-weight: bold;">Reset</button>
+                        </form>
+                    </div>
+                    <div id="editForm" style="display: none; width: 100%; padding: 4px; margin: 16px 0px; background: var(--bs-btn-bg);">
+                        <p class="mb-4" style="font-size: 15px;font-weight: bold;">Edit Exiting Item</p>
+                        <form action="javascript:void(0);" onsubmit="updateItem()" style="margin: 3px; padding: 5px;">
+                            <p>
+                                <label class="form-label">Updated Item Name:</label>
+                                <input type="hidden" id="edit-id">
+                                <input class="form-control" id="edit-name" type="text">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="edit-isComplete">
+                                    <label class="form-check-label" for="edit-isComplete">Mark as Complete</label>
+                                </div>
+                            </p>
+                            <button type="submit" class="btn btn-primary btn-lg me-2" style="margin: 2px; font-size: 14px; font-weight: bold;">Update</button>
+                            <button type="button" class="btn btn-light btn-lg" onclick="resetAndCloseForm()" style="margin: 5px; font-size: 14px; font-weight: bold;">Reset</button>
+                        </form>
+                    </div>
+                    <p id="counter"></p>
+                    <div class="table-responsive" style="border-color: rgba(255,255,255,0);background: var(--bs-table-color);border-top-left-radius: 18px;border-top-right-radius: 18px;border-bottom-right-radius: 18px;border-bottom-left-radius: 18px;">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">Complete?</th>
+                                    <th>Item</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="todos"></tbody>
+                            <script src="js/site.js" asp-append-version="true"></script>
+                            <script type="text/javascript">
+                                getItems();
+                            </script>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "TodoTests": {
+      "commandName": "Project",
+      "workingDirectory": "E:\\Programs\\Udemy\\C-Sharp-Academy-Web-Projects\\TSCA-Todo.Arashi256\\TodoTests"
+    }
+  }
+}

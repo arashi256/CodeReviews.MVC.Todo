@@ -1,0 +1,5 @@
+﻿@TodoApi_HostAddress = https://localhost:7295
+
+GET {{TodoApi_HostAddress}}/todoitems/complete
+
+###
