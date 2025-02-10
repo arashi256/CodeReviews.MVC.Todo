@@ -20,3 +20,46 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+/* Ensure the entire table container has rounded corners. */
+.table-responsive {
+    border-radius: 15px !important; /* Ensures all corners are rounded. */
+    overflow: hidden !important; /* Prevents inner table from overflowing. */
+    border: 2px solid var(--bs-gray-500); /* Add border. */
+}
+
+/* Ensure the actual table inside is also rounded. */
+.table {
+    border-radius: 15px !important;
+    overflow: hidden;
+}
+
+/* Darken only the table headers */
+.table thead th {
+    background-color: var(--bs-gray-700) !important; /* Darker header. */
+    color: white !important; /* Keep text readable. */
+    border-color: var(--bs-gray-600) !important; /* Slightly darker border. */
+}
+
+/* Styling for checkboxes inside the item list */
+#todos .form-check-input {
+    border: 2px solid yellow !important; /* Yellow border for unchecked. */
+    opacity: 1 !important; /* Ensure visibility. */
+    cursor: default !important; /* Prevent hover pointer change. */
+    background-color: darkgoldenrod !important; /* Orange background when unchecked. */
+    accent-color: yellow !important; /* Changes tick colour. */
+}
+
+/* Target only checked checkboxes inside the item list. */
+#todos .form-check-input:checked {
+    border-color: green !important; /* Green border when checked. */
+    background-color: darkgreen !important; /* Green tick background. */
+    accent-color: green !important; /* Changes tick colour. */
+}
+
+/* Apply only to the checkbox inside the edit form */
+#editForm .form-check-input {
+    border: 2px solid white !important; /* Black border */
+    background-color: inherit !important; /* Keep default background */
+    accent-color: initial !important; /* Keep Bootstrap’s tick colour */
+}

@@ -22,20 +22,41 @@ function addItem() {
         },
         body: JSON.stringify(item)
     })
-        .then(response => response.json())
-        .then(() => {
-            getItems();
-            addNameTextbox.value = '';
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Failed to add new item.");
+            }
+            return response.json();
         })
-        .catch(error => console.error('Unable to add item.', error));
+        .then(() => {
+            getItems(); // Refresh the item list
+            toastr.success("New item added successfully!", "Added");
+            addNameTextbox.value = ''; // Clear the input field.
+        })
+        .catch(error => {
+            console.error('Unable to add item.', error);
+            toastr.error("Failed to add item.", "Error"); // Show error notification if add fails.
+        });
 }
 
 function deleteItem(id) {
     fetch(`${uri}/${id}`, {
         method: 'DELETE'
     })
-        .then(() => getItems())
-        .catch(error => console.error('Unable to delete item.', error));
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Failed to delete item with ID ${id}`);
+            }
+            return response;
+        })
+        .then(() => {
+            getItems(); // Refresh the item list after deletion.
+            toastr.success("Item deleted successfully!", "Deleted");
+        })
+        .catch(error => {
+            console.error('Unable to delete item.', error);
+            toastr.error("Failed to delete item.", "Error"); // Show error notification if delete fails.
+        });
 }
 
 function displayEditForm(id) {
@@ -61,11 +82,24 @@ function updateItem() {
         },
         body: JSON.stringify(item)
     })
-        .then(() => getItems())
-        .catch(error => console.error('Unable to update item.', error));
-    closeInput();
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Failed to update item with ID ${itemId}`);
+            }
+            return response;
+        })
+        .then(() => {
+            getItems(); // Refresh the item list after update.
+            toastr.success("Item updated successfully!", "Updated");
+            closeInput(); // Hide the edit form.
+        })
+        .catch(error => {
+            console.error('Unable to update item.', error);
+            toastr.error("Failed to update item.", "Error"); // Show error notification if update fails.
+        });
     return false;
 }
+
 
 function closeInput() {
     document.getElementById('editForm').style.display = 'none';
@@ -79,25 +113,22 @@ function _displayCount(itemCount) {
 function _displayItems(data) {
     const tBody = document.getElementById('todos');
     tBody.innerHTML = '';
+
     _displayCount(data.length);
+
     data.forEach(item => {
         let isCompleteCheckbox = document.createElement('input');
         isCompleteCheckbox.type = 'checkbox';
         isCompleteCheckbox.checked = item.isComplete;
-        isCompleteCheckbox.disabled = true; // Keep it disabled (read-only)
-        // Apply Bootstrap styles + override default disabled styling so it's not as pale.
+        isCompleteCheckbox.disabled = true; // Keep it disabled (read-only).
+        // Only apply Bootstrap class (CSS handles styling).
         isCompleteCheckbox.className = 'form-check-input';
-        // Change only the border color to black for unchecked checkboxes
-        isCompleteCheckbox.style.borderColor = "black";
-        isCompleteCheckbox.style.borderWidth = "2px"; // Increase thickness
-        isCompleteCheckbox.style.opacity = "1"; // Make it fully visible
-        isCompleteCheckbox.style.cursor = "default"; // Prevent pointer change
-        // Create "Edit" button with Bootstrap styles instead of regular JavaScript buttons.
+        // Create "Edit" button with Bootstrap styles.
         let editButton = document.createElement('button');
         editButton.innerText = 'Edit';
-        editButton.className = 'btn btn-primary btn-sm me-2'; // Bootstrap styles
+        editButton.className = 'btn btn-primary btn-sm me-2'; // Bootstrap styles.
         editButton.setAttribute('onclick', `displayEditForm(${item.id})`);
-        // Create "Delete" button with Bootstrap styles instead of regular JavaScript buttons.
+        // Create "Delete" button with Bootstrap styles.
         let deleteButton = document.createElement('button');
         deleteButton.innerText = 'Delete';
         deleteButton.className = 'btn btn-danger btn-sm'; // Bootstrap styles.

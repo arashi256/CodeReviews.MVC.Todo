@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>To-Do App</title>
+    <!-- Site CSS -->
     <link rel="stylesheet" href="css/site.css" />
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <!-- Toastr CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 </head>
 <body style="color: var(--bs-black);background: var(--bs-secondary);">
     <div class="container" style="padding: 40px;margin: 1px auto;">
@@ -13,7 +17,8 @@
             <div class="container">
                 <div class="text-white bg-dark border rounded border-0 p-4 p-md-5" style="border-radius: 6px;border-top-left-radius: 6px;border: 15px solid var(--bs-black);--bs-body-bg: var(--bs-gray-500);">
                     <h2 class="fw-bold text-white mb-3">ToDo List App</h2>
-                    <p><br/></p>
+                    <p><br /></p>
+                    <!-- Add operation -->
                     <p class="mb-2" style="font-size: 15px;font-weight: bold;">Add New List Item</p>
                     <div class="my-3" style="width: 100%;padding: 4px;">
                         <form action="javascript:void(0);" method="POST" onsubmit="addItem()" style="margin: 3px;padding: 5px;">
@@ -25,6 +30,7 @@
                             <button type="reset" class="btn btn-light btn-lg" style="margin: 5px; font-size: 14px; font-weight: bold;">Reset</button>
                         </form>
                     </div>
+                    <!-- Edit operation -->
                     <div id="editForm" style="display: none; width: 100%; padding: 4px; margin: 16px 0px; background: var(--bs-btn-bg);">
                         <p class="mb-4" style="font-size: 15px;font-weight: bold;">Edit Exiting Item</p>
                         <form action="javascript:void(0);" onsubmit="updateItem()" style="margin: 3px; padding: 5px;">
@@ -42,6 +48,7 @@
                         </form>
                     </div>
                     <p id="counter"></p>
+                    <!-- Todo item list -->
                     <div class="table-responsive" style="border-color: rgba(255,255,255,0);background: var(--bs-table-color);border-top-left-radius: 18px;border-top-right-radius: 18px;border-bottom-right-radius: 18px;border-bottom-left-radius: 18px;">
                         <table class="table">
                             <thead>
@@ -63,6 +70,11 @@
             </div>
         </section>
     </div>
+    <!-- jQuery (Toastr requires jQuery) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Toastr JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <!-- Bootstrap JS -->
     <script src="/js/bootstrap.min.js"></script>
 </body>
 </html>
